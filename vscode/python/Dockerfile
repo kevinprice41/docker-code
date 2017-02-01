@@ -1,4 +1,4 @@
-FROM ubuntu
+FROM python
 
 MAINTAINER Kevin Price <kevinprice41@gmail.com>
 RUN apt-get update -y \
@@ -20,9 +20,13 @@ RUN apt-get update -y \
     libnss3 \
     libxss1 \
     wget \
-    libnotify4 
+    libnotify4 \
+    exuberant-ctags
 
 RUN wget -O /root/vscode.deb https://go.microsoft.com/fwlink/?LinkID=760868 \
     && dpkg -i /root/vscode.deb
 
-CMD code --user-data-dir=/workspace --wait --verbose
+RUN pip install jedi 
+
+
+CMD code --user-data-dir=/user-data  --wait --verbose
