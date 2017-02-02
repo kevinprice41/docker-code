@@ -22,14 +22,12 @@ xhost + $ip
 
 Build
 ```
-docker build -t prizyp/golang .
+docker build -t prizyp/eclipse .
 ```
 
 Run
 ```
-docker run -it -d -v <user-data>:/user-data -v <workspace>:/workspace -v $HOME:/root --net=host --privileged -e DISPLAY=$ip:0 -v /tmp/.X11-unix:/tmp/.X11-unix prizyp/golang
+docker run -it -d -v <workspace>:/workspace --net=host --privileged -e DISPLAY=$ip:0 -v /tmp/.X11-unix:/tmp/.X11-unix prizyp/eclipse
 ```
 
-Yes I know that vscode doesn't like being run as root - but your in a container - Live a little :)
-
-Create an alias from the script included in this repository: go.sh
+Create an alias from the script included in this repository: eclipse.sh
