@@ -1,4 +1,6 @@
-FROM python
+FROM java:8-jdk
+
+USER root 
 
 MAINTAINER Kevin Price <kevinprice41@gmail.com>
 RUN apt-get update -y \
@@ -9,8 +11,6 @@ RUN apt-get update -y \
     fakeroot \
     rpm \
     git \
-    nodejs \
-    npm \
     build-essential \
     libgtk2.0-0 \
     libgconf-2-4 \
@@ -19,13 +19,8 @@ RUN apt-get update -y \
     libnss3 \
     libxss1 \
     wget \
-    libnotify4 \
-    exuberant-ctags
+    libnotify4 
 
-RUN wget -O /root/vscode.deb https://go.microsoft.com/fwlink/?LinkID=760868 \
-    && dpkg -i /root/vscode.deb
+RUN wget -O /root/eclipse.tar.gz http://ftp.osuosl.org/pub/eclipse/technology/epp/downloads/release/neon/2/eclipse-jee-neon-2-linux-gtk-x86_64.tar.gz && tar -xvzf /root/eclipse.tar.gz -C /root/ && chmod +x /root/eclipse/eclipse
 
-RUN pip install jedi 
-
-
-CMD code --user-data-dir=/user-data  --wait --verbose
+CMD /root/eclipse/eclipse
